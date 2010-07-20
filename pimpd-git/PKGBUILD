@@ -1,0 +1,40 @@
+# Contributor: Christoph Siegenthaler <csi@gmx.ch>
+pkgname=pimpd-git
+pkgver=20100720
+pkgrel=1
+pkgdesc="Perl Interface for the Music Player Daemon (MPD)"
+arch=('any')
+url="http://github.com/trapd00r/pimpd"
+license=('GPLv3')
+depends=('perl-html-tokeparser-simple' 'perl-audio-mpd' \
+	'perl-libwww' 'perl-text-autoformat')
+makedepends=('git')
+backup=('etc/pimpd.conf')
+source=()
+md5sums=() 
+
+_gitroot="git://github.com/trapd00r/pimpd.git"
+_gitname="pimpd"
+
+build() {
+  cd "$srcdir"
+  msg "Connecting to GIT server...."
+
+  if [ -d $_gitname ] ; then
+    cd $_gitname && git pull origin
+    msg "The local files are updated."
+  else
+    git clone $_gitroot $_gitname
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "$srcdir/$_gitname-build"
+  git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname-build"
+  
+  mkdir -p $pkgdir/{etc,/usr/bin}
+  install pimpd $pkgdir/usr/bin
+  install pimpd.conf $pkgdir/etc
+} 
