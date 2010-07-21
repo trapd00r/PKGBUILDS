@@ -1,4 +1,4 @@
-# Contributor: Magnus Woldrich <trapd00r@trapd00r.se>
+# Maintainer: Magnus Woldrich <trapd00r\@trapd00r.se>
 pkgname=rmcd-git
 pkgver=20100721
 pkgrel=1
@@ -42,5 +42,10 @@ build() {
   { perl Makefile.PL &&
     make &&
     make install; } || return 1
+
+  install -D -m644 $srcdir/rmcd/rmcd.conf \
+    $pkgdir/etc/rmcd.conf
+
+
 
 }
