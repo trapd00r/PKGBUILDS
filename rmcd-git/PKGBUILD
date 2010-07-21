@@ -1,6 +1,6 @@
 # Contributor: Magnus Woldrich <trapd00r@trapd00r.se>
 pkgname=rmcd-git
-pkgver=20100720
+pkgver=20100721
 pkgrel=1
 pkgdesc="Run mplayer as a daemon and control it remotely"
 arch=('any')
