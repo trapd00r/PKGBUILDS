@@ -1,0 +1,41 @@
+# Contributor: Magnus Woldrich <trapd00r@trapd00r.se>
+pkgname=screenfo-git
+pkgver=20100827
+pkgrel=1
+pkgdesc="screenshot information tool for nerds"
+arch=('any')
+url="http://github.com/trapd00r/screenfo"
+license=('GPLv2')
+depends=('perl' 'scrot' 'perl-string-utils-git')
+makedepends=('git')
+source=()
+md5sums=() 
+install="screenfo.install"
+
+_gitroot="git://github.com/trapd00r/screenfo.git"
+_gitname="screenfo"
+
+build() {
+  cd "$srcdir"
+  msg "Connecting to GIT server...."
+
+  if [ -d $_gitname ] ; then
+    cd $_gitname && git pull origin
+    msg "The local files are updated."
+  else
+    git clone $_gitroot $_gitname
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "$srcdir/$_gitname-build"
+  git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname-build"
+
+  mkdir -p $pkgdir/usr/bin
+
+  {
+    su -c 'make install'
+  } || return 1
+}

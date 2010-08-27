@@ -1,0 +1,12 @@
+post_install() {
+  /bin/cat << EOF
+
+  A configuration file is expected to be found in either /etc/screenfo.conf or
+  $XDG_CONFIG_HOME/screenfo/screenfo.conf
+
+  An example configuration file can be found in /usr/share/screenfo/
+
+EOF
+}
+
+# vim:set ts=2 sw=2 et:
