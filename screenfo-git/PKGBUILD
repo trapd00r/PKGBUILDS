@@ -1,6 +1,6 @@
 # Contributor: Magnus Woldrich <trapd00r@trapd00r.se>
 pkgname=screenfo-git
-pkgver=20100827
+pkgver=20100828
 pkgrel=1
 pkgdesc="screenshot information tool for nerds"
 arch=('any')
@@ -8,9 +8,10 @@ url="http://github.com/trapd00r/screenfo"
 license=('GPLv2')
 depends=('perl' 'scrot' 'perl-string-utils-git')
 makedepends=('git')
+#backup=('screenfo.conf')
 source=()
-md5sums=() 
-install="screenfo.install"
+md5sums=()
+#install="screenfo.install"
 
 _gitroot="git://github.com/trapd00r/screenfo.git"
 _gitname="screenfo"
@@ -36,6 +37,14 @@ build() {
   mkdir -p $pkgdir/usr/bin
 
   {
-    su -c 'make install'
+    install -D "$srcdir/$_gitname-build"/src/screenfo "$pkgdir/usr/bin/"
+
+    mkdir -p "$pkgdir/usr/share/screenfo"
+    cp -R "$srcdir/$_gitname-build"/ascii/ "$pkgdir/usr/share/screenfo/"
+
+    install -D -m 664 "$srcdir/$_gitname-build"/screenfo.conf \
+      "$pkgdir/usr/share/screenfo/screenfo.conf.example"
+    install -D -m 664 "$srcdir/$_gitname-build"/screenfo.conf \
+      "$pkgdir/etc/screenfo.conf"
   } || return 1
 }
