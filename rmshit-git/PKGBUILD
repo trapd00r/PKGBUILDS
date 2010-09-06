@@ -8,6 +8,7 @@ url="http://github.com/trapd00r/rmshit"
 license=('GPLv3')
 depends=('perl' 'perl-linux-inotify2')
 makedepends=('git')
+backup=(etc/rmshit.conf)
 source=()
 md5sums=()
 
