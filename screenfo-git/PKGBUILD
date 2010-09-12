@@ -1,6 +1,6 @@
-# Contributor: Magnus Woldrich <trapd00r@trapd00r.se>
+# Maintainer: Magnus Woldrich <trapd00r@trapd00r.se>
 pkgname=screenfo-git
-pkgver=20100828
+pkgver=20100829
 pkgrel=1
 pkgdesc="screenshot information tool for nerds"
 arch=('any')
@@ -8,7 +8,7 @@ url="http://github.com/trapd00r/screenfo"
 license=('GPLv2')
 depends=('perl' 'scrot' 'perl-string-utils-git')
 makedepends=('git')
-#backup=('screenfo.conf')
+backup=(etc/screenfo.conf)
 source=()
 md5sums=()
 #install="screenfo.install"

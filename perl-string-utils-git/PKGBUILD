@@ -1,4 +1,4 @@
-# Contributor: Magnus Woldrich <trapd00r@trapd00r.se>
+# Maintainer: Magnus Woldrich <trapd00r@trapd00r.se>
 pkgname=perl-string-utils-git
 pkgver=20100824
 pkgrel=1

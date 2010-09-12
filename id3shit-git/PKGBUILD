@@ -1,4 +1,4 @@
-# Maintainer Magnus Woldrich <trapd00r\@trapd00r.se>
+# Maintainer: Magnus Woldrich <trapd00r\@trapd00r.se>
 pkgname=id3shit-git
 pkgver=20100830
 pkgrel=1
