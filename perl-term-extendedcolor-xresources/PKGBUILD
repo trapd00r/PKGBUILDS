@@ -1,0 +1,35 @@
+# CPAN Name  : Term-ExtendedColor-Xresources
+# Maintainer: Magnus Woldrich <magnus@trapd00r.se>
+
+pkgname='perl-term-extendedcolor-xresources'
+pkgver="0.001"
+pkgrel='1'
+pkgdesc="Subclass to Term::ExtendedColor"
+arch=('i686' 'x86_64')
+url='http://search.cpan.org/dist/Term-ExtendedColor-Xresources'
+license=('PerlArtistic' 'GPL')
+depends=('perl-term-readkey')
+options=('!emptydirs')
+
+source=('http://search.cpan.org/CPAN/authors/id/W/WO/WOLDRICH/Term-ExtendedColor-Xresources-0.001.tar.gz')
+md5sums=('d6febfefeb20c889da097d77a0b73658')
+
+build() {
+  DIST_DIR="${srcdir}/Term-ExtendedColor-Xresources-0.001"
+  export PERL_MM_USE_DEFAULT=1 PERL5LIB=""                 \
+    PERL_AUTOINSTALL=--skipdeps                            \
+    PERL_MM_OPT="INSTALLDIRS=vendor DESTDIR='$pkgdir'"     \
+    PERL_MB_OPT="--installdirs vendor --destdir '$pkgdir'" \
+    MODULEBUILDRC=/dev/null
+  {
+	cd "$DIST_DIR" &&
+    perl Makefile.PL &&
+    make &&
+    make test &&
+    make DESTDIR="$pkgdir" install;
+  } || return 1;
+
+  find "$pkgdir" -name .packlist -o -name perllocal.pod -delete
+
+}
+
