@@ -29,6 +29,6 @@ build() {
   rm -rf "$srcdir/$_gitname-build"
   git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
   cd "$srcdir/$_gitname-build"
-  install -d ${pkgdir}/usr/share/vim/vim72/colors/
-  cp *.vim $pkgdir/usr/share/vim/vim72/colors/ || return 1
+  install -d ${pkgdir}/usr/share/vim/vim73/colors/
+  cp *.vim $pkgdir/usr/share/vim/vim73/colors/ || return 1
 }
