@@ -1,6 +1,6 @@
 # Maintainer: Magnus Woldrich <trapd00r@trapd00r.se>
 pkgname='pimpd2-git'
-pkgver=20110104
+pkgver=20110110
 pkgrel=1
 pkgdesc="Perl Interface for the Music Player Daemon 2"
 arch=('any')
@@ -8,9 +8,9 @@ url="http://github.com/trapd00r/pimpd2"
 license=('Perl5')
 
 depends=(
-  'perl-audio-mpd'
   'perl-term-extendedcolor'
   'perl-term-readline-gnu'
+  'perl-audio-mpd'
 )
 
 makedepends=('git')
@@ -41,13 +41,8 @@ build() {
   
   mkdir -p $pkgdir/{etc,/usr/bin}
 
-  export PERL_MM_USE_DEFAULT=1 PERL_AUTOINSTALL=--skipdeps \
-    PERL_MM_OPT="INSTALLDIRS=vendor DESTDIR='$pkgdir'" \
-    PERL_MB_OPT="--installdirs vendor --destdir '$pkgdir'" \
-    MODULEBUILDRC=/dev/null
-
   {
-    perl Makefile.PL &&
+    PERL_MM_USE_DEFAULT=1 perl Makefile.PL &&
       make &&
       make test &&
       make install
