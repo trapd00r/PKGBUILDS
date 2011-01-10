@@ -15,21 +15,14 @@ source=('http://search.cpan.org/CPAN/authors/id/W/WO/WOLDRICH/Term-ExtendedColor
 md5sums=('be9035256037ed01d17a2d1c361f7205')
 
 build() {
-  DIST_DIR="${srcdir}/Term-ExtendedColor-TTY-0.001"
-  export PERL_MM_USE_DEFAULT=1 PERL5LIB=""                 \
-    PERL_AUTOINSTALL=--skipdeps                            \
-    PERL_MM_OPT="INSTALLDIRS=vendor DESTDIR='$pkgdir'"     \
-    PERL_MB_OPT="--installdirs vendor --destdir '$pkgdir'" \
-    MODULEBUILDRC=/dev/null
+  DIST_DIR="${srcdir}/Term-ExtendedColor-TTY-0.002"
+
   {
 	cd "$DIST_DIR" &&
-    perl Makefile.PL &&
+    MM_USE_DEFAULT=1 perl Makefile.PL &&
     make &&
     make test &&
     make DESTDIR="$pkgdir" install;
   } || return 1;
-
-  find "$pkgdir" -name .packlist -o -name perllocal.pod -delete
-
 }
 
