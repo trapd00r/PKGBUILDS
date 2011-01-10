@@ -18,20 +18,14 @@ md5sums=('864647af0812312863ae7a988440622a')
 
 build() {
   DIST_DIR="${srcdir}/Term-ExtendedColor-0.167"
-  export PERL_MM_USE_DEFAULT=1 PERL5LIB=""                 \
-    PERL_AUTOINSTALL=--skipdeps                            \
-    PERL_MM_OPT="INSTALLDIRS=vendor DESTDIR='$pkgdir'"     \
-    PERL_MB_OPT="--installdirs vendor --destdir '$pkgdir'" \
-    MODULEBUILDRC=/dev/null
+
   {
-	cd "$DIST_DIR" &&
-    perl Makefile.PL &&
+	  cd "$DIST_DIR" &&
+    PERL_MM_USE_DEFAULT=1 perl Makefile.PL &&
     make &&
     make test &&
     make DESTDIR="$pkgdir" install;
   } || return 1;
-
-  find "$pkgdir" -name .packlist -o -name perllocal.pod -delete
 
 }
 
