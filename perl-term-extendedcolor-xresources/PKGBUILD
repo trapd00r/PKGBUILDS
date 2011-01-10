@@ -16,20 +16,14 @@ md5sums=('d6febfefeb20c889da097d77a0b73658')
 
 build() {
   DIST_DIR="${srcdir}/Term-ExtendedColor-Xresources-0.001"
-  export PERL_MM_USE_DEFAULT=1 PERL5LIB=""                 \
-    PERL_AUTOINSTALL=--skipdeps                            \
-    PERL_MM_OPT="INSTALLDIRS=vendor DESTDIR='$pkgdir'"     \
-    PERL_MB_OPT="--installdirs vendor --destdir '$pkgdir'" \
-    MODULEBUILDRC=/dev/null
+
   {
 	cd "$DIST_DIR" &&
-    perl Makefile.PL &&
+    PERL_MM_USE_DEFAULT=1 perl Makefile.PL &&
     make &&
     make test &&
     make DESTDIR="$pkgdir" install;
   } || return 1;
-
-  find "$pkgdir" -name .packlist -o -name perllocal.pod -delete
 
 }
 
