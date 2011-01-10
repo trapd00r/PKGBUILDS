@@ -1,12 +1,12 @@
 # Maintainer: Magnus Woldrich <trapd00r@trapd00r.se>
 pkgname=screenfo-git
-pkgver=20100829
+pkgver=20110110
 pkgrel=1
 pkgdesc="screenshot information tool for nerds"
 arch=('any')
 url="http://github.com/trapd00r/screenfo"
 license=('GPLv2')
-depends=('perl' 'scrot' 'perl-string-utils-git')
+depends=('scrot' 'perl-term-extendedcolor')
 makedepends=('git')
 backup=(etc/screenfo.conf)
 source=()
@@ -34,17 +34,18 @@ build() {
   git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
   cd "$srcdir/$_gitname-build"
 
-  mkdir -p $pkgdir/usr/bin
+  #mkdir -p $pkgdir/usr/bin
 
   {
-    install -D "$srcdir/$_gitname-build"/src/screenfo "$pkgdir/usr/bin/"
-
     mkdir -p "$pkgdir/usr/share/screenfo"
     cp -R "$srcdir/$_gitname-build"/ascii/ "$pkgdir/usr/share/screenfo/"
-
-    install -D -m 664 "$srcdir/$_gitname-build"/screenfo.conf \
-      "$pkgdir/usr/share/screenfo/screenfo.conf.example"
     install -D -m 664 "$srcdir/$_gitname-build"/screenfo.conf \
       "$pkgdir/etc/screenfo.conf"
+  }
+
+  {
+    PERL_MM_USE_DEFAULT=1 perl Makefile.PL &&
+      make &&
+      make DESTDIR="$pkgdir" install
   } || return 1
 }
