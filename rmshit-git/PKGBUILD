@@ -1,6 +1,6 @@
 # Maintainer Magnus Woldrich <trapd00r\@trapd00r.se>
 pkgname=rmshit-git
-pkgver=20100721
+pkgver=20110122
 pkgrel=1
 pkgdesc="Keep your home directory (or other dir) clean from unwanted mess"
 arch=('any')
@@ -44,6 +44,6 @@ build() {
     make &&
     make install; } || return 1
 
-  install -D -m644 $srcdir/rmshit/rmshit.conf \
+  install -D -m644 $srcdir/rmshit/doc/rmshit.conf.example \
     $pkgdir/etc/rmshit.conf
 }
